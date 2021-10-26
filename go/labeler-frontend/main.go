@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
@@ -90,10 +91,14 @@ func getLabels(file string) []string {
 
 func main() {
 	scriptPtr := flag.String("script", "../../python/labeler.py", "Script path")
-	modelRootPtr := flag.String("model-root", "../../models", "Root dir of models")
+	modelRootPtr := flag.String("model-root", "../../model", "Root dir of models")
 	flag.Parse()
 	modelRoot = *modelRootPtr
 	script = *scriptPtr
+
+	// Clean upload dir
+	os.RemoveAll("upload")
+	os.Mkdir("upload", 0644)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", indexHandler)

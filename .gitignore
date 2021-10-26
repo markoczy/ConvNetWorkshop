@@ -2,6 +2,11 @@
 *.pth
 *.zip
 *.exe
+
+# Training data, models etc.
 data/
+~data/readme.txt
+model/
+~model/readme.txt
 rawdata/
 **/upload/

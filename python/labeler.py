@@ -6,6 +6,7 @@ import sys
 import os
 import os.path
 from PIL import Image
+import codecs
 
 # Predicts if an Input Image matches a given label ("pos" category)
 def predict(model, input):
@@ -40,20 +41,29 @@ def run():
     input = input.unsqueeze(0)
     input = input.to('cuda')
 
+    models = {}
     labels = []
     files = os.listdir(model_root)
+    # Load models
     for v in files:
         if v.endswith(".pt"):
             label = v[:-3]
             if label.endswith("_fittest"):
                 label = label[:-8]
-            model = torch.load(os.path.join(model_root, v))
-            model.eval()
-            if predict(model, input):
-                labels.append(label)
+                models[label] = v
+            else:
+                if not label in models:
+                    models[label] = v
+    # Test labels
+    for label in models:
+        model = torch.load(os.path.join(model_root, models[label]))
+        model.eval()
+        if predict(model, input):
+            # hack for windows
+            utf8 = bytes(label, 'utf-8')
+            labels.append(codecs.decode(utf8, 'mbcs'))
     for l in labels:
         print(l)
-
 
 if __name__ == '__main__':
     run()

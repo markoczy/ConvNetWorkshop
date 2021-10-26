@@ -231,8 +231,8 @@ def run():
         dataset = sys.argv[1]
 
     data_dir = '../data/' + dataset
-    model_name = dataset+'.pt'
-    fittest_name = dataset+'_fittest.pt'
+    model_name = '../model/' + dataset+'.pt'
+    fittest_name = '../model/' + dataset + '_fittest.pt'
 
     init_plotter()
     print("Using device:", device)
