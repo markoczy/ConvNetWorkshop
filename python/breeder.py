@@ -60,11 +60,8 @@ learn_rate_decay_epochs = 7
 learn_rate_decay_gamma = 0.2
 ############################################################################
 
-
-
 # Initialises CUDA if machine is CUDA capable otherwise uses CPU
-def init_device():
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 # Sets plotter to interactive mode
 def init_plotter():
@@ -233,11 +230,10 @@ def run():
     else:
         dataset = sys.argv[1]
 
-    data_dir = 'data/' + dataset
+    data_dir = '../data/' + dataset
     model_name = dataset+'.pt'
     fittest_name = dataset+'_fittest.pt'
 
-    init_device()
     init_plotter()
     print("Using device:", device)
 
