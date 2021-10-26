@@ -6,7 +6,8 @@ CNN Transfer Learning Workshop for the Digital Impact Network.
 
 - Python 3.9.5 https://www.python.org 
 - Pytorch mit CUDA 11 Support 1.8.1 https://pytorch.org/
-- NVIDIA CUDA Toolkit 11.1 https://developer.nvidia.com/cuda-toolkit 
+- NVIDIA CUDA Toolkit 11.1 https://developer.nvidia.com/cuda-toolkit
+- (Optional) For the Frontend: Go1.15 or later
 
 ## Modules
 
